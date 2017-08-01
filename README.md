@@ -16,6 +16,37 @@ make
 $ ./a.out [data-path] [options]
 ```
 
+## Example
+
 ```
-$ ./a.out data/small --bubble-sort --print-results
+$ ./a.out data/mini --bubble-sort --print-results
+
+Running 'Bubble Sort' on 25 element data set: COMPLETE
+Duration: 22 microseconds (2.2e-05 seconds).
+Results:
+        Lynn    1
+   Kimberley    1
+       Erica    6
+     Bradley   23
+     Cassady   25
+      Kareem   37
+       Nehru   45
+        Ivan   58
+     Raymond   59
+      Clarke   65
+        Jane   80
+      Tyrone   86
+         Ira   86
+      Keaton  119
+      Ciaran  123
+       Aimee  123
+       Lacey  125
+     Malachi  137
+     Zachery  141
+       Sacha  152
+      Holmes  154
+     Cecilia  160
+       Lacey  166
+      Burton  169
+       Perry  197
 ```
