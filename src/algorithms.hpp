@@ -59,11 +59,11 @@ namespace algorithms {
 
   template <class T>
   void insertion_sort(T array[], const size_t array_size) {
-    int i = 1;
-    while ((size_t) i < array_size) {
+    size_t i = 1;
+    while (i < array_size) {
       const T this_element = array[i];
-      int j = i - 1;
-      while (j >= 0 && array[j] > this_element) {
+      size_t j = i - 1;
+      while (j != SIZE_MAX && array[j] > this_element) {
         array[j + 1] = array[j];
         j--;
       }
