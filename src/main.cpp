@@ -66,7 +66,7 @@ std::vector<SortMethod> load_sort_methods(const Options& options) {
 std::vector<Person> load_data(const char *path) {
   std::ifstream file_stream { path };
   if (!file_stream) {
-    fatal_error("Error: data path '" + (std::string) path + "' could not be opened.");
+    fatal_error("Error: data path '" + (std::string) path + "' could not be opened (use --help).");
   }
   std::vector<Person> people;
   std::string name;
@@ -84,11 +84,10 @@ void print_data(const std::vector<Person>& data) {
   for (auto& person : data) {
     std::cout << std::setw(12) << person << " " << std::setw(4) << person.get_age() << "\n";
   }
-  std::cout << "\n";
 }
 
 void print_aggregate(const std::vector<SortMethod>& sort_methods) {
-  std::cout << "\n";
+  std::cout << "\nResults Aggregate:\n\n";
   for (const auto& method : sort_methods) {
     std::cout << std::setw(16) << method.name << ": "
         << std::setw(10) << method.runtime << " µs " 
@@ -108,7 +107,7 @@ void run_sort_methods(std::vector<Person>& data, std::vector<SortMethod>& sort_m
     std::cout << "COMPLETE\n";
     std::cout << "Duration: " << sort_method.runtime << " µs (" << (sort_method.runtime / 1000000.0) << " seconds)." << "\n";
     if (print_results) {
-      std::cout << "Results:\n";
+      std::cout << "\nResults:\n\n";
       print_data(data_copy);
     }
   }
