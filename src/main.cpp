@@ -8,6 +8,7 @@
 #include <vector>
 
 struct Options {
+  bool help = false;
   bool print_results = false;
   bool aggregate_results = false;
   bool bubble_sort = false;
@@ -28,12 +29,31 @@ void fatal_error(const std::string& message) {
 Options parse_options(std::vector<std::string> argv) {
   Options options;
   for (auto& arg : argv) {
+    if (arg == "--help") options.help = true;
     if (arg == "--print-results") options.print_results = true;
     if (arg == "--aggregate-results") options.aggregate_results = true;
     if (arg == "--bubble-sort") options.bubble_sort = true;
     if (arg == "--insertion-sort") options.insertion_sort = true;
   }
   return options;
+}
+
+void print_help() {
+  std::cout << "\n";
+  std::cout << "Usage:\n\n";
+  std::cout << "  $ ./a.out [data-path] [options]\n";
+  std::cout << "\n";
+  std::cout << "Options:\n\n";
+  std::cout << "  --help               Show help screen and quit.\n";
+  std::cout << "  --print-results      Show ordered data after each sort.\n";
+  std::cout << "  --aggregate-results  Show runtime chart after all sorts are complete.\n";
+  std::cout << "\n";
+  std::cout << "  --bubble-sort        Execute the bubble sort algorithm.\n";
+  std::cout << "  --insertion-sort     Execute the insertion sort algorithm.\n";
+  std::cout << "\n";
+  std::cout << "Example:\n\n";
+  std::cout << "  $ ./a.out data/mini --bubble-sort --insertion-sort --print-results --aggregate-results\n";
+  std::cout << "\n";
 }
 
 std::vector<SortMethod> load_sort_methods(const Options& options) {
@@ -46,7 +66,7 @@ std::vector<SortMethod> load_sort_methods(const Options& options) {
 std::vector<Person> load_data(const char *path) {
   std::ifstream file_stream { path };
   if (!file_stream) {
-    fatal_error("error: data path '" + (std::string) path + "' could not be opened");
+    fatal_error("Error: data path '" + (std::string) path + "' could not be opened.");
   }
   std::vector<Person> people;
   std::string name;
@@ -98,10 +118,16 @@ int main(int argc, char *argv[]) {
 
   // parse command-line
   if (argc < 2) {
-    fatal_error("error: data path not provided");
+    fatal_error("Error: data path not provided (use --help).");
   }
   std::vector<std::string> args = { argv, argv + argc };
   const Options options = parse_options(args);
+
+  // display help and exit
+  if (options.help) {
+    print_help();
+    return 0;
+  }
 
   // load data set
   std::vector<Person> data = load_data(args[1].c_str());

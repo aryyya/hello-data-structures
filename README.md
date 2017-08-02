@@ -13,7 +13,24 @@ make
 ## Usage
 
 ```
-$ ./a.out [data-path] [options]
+
+Usage:
+
+  $ ./a.out [data-path] [options]
+
+Options:
+
+  --help               Show help screen and quit.
+  --print-results      Show ordered data after each sort.
+  --aggregate-results  Show runtime chart after all sorts are complete.
+
+  --bubble-sort        Execute the bubble sort algorithm.
+  --insertion-sort     Execute the insertion sort algorithm.
+
+Example:
+
+  $ ./a.out data/mini --bubble-sort --insertion-sort --print-results --aggregate-results
+
 ```
 
 ## Example
