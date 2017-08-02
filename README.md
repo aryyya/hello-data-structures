@@ -36,34 +36,18 @@ Example:
 ## Example
 
 ```
-$ ./a.out data/mini --bubble-sort --print-results
+$ ./a.out data/medium --bubble-sort --insertion-sort --aggregate-results
 
-Running 'Bubble Sort' on 25 element data set: COMPLETE
-Duration: 22 microseconds (2.2e-05 seconds).
-Results:
-        Lynn    1
-   Kimberley    1
-       Erica    6
-     Bradley   23
-     Cassady   25
-      Kareem   37
-       Nehru   45
-        Ivan   58
-     Raymond   59
-      Clarke   65
-        Jane   80
-      Tyrone   86
-         Ira   86
-      Keaton  119
-      Ciaran  123
-       Aimee  123
-       Lacey  125
-     Malachi  137
-     Zachery  141
-       Sacha  152
-      Holmes  154
-     Cecilia  160
-       Lacey  166
-      Burton  169
-       Perry  197
+Running 'Bubble Sort' on 50000 element data set: COMPLETE
+Duration: 64523313 µs (64.5233 seconds).
+
+Running 'Insertion Sort' on 50000 element data set: COMPLETE
+Duration: 20857770 µs (20.8578 seconds).
+
+Results Aggregate:
+
+     Bubble Sort:   64523313 µs    64.5233 sec
+  Insertion Sort:   20857770 µs    20.8578 sec
+
 ```
+
