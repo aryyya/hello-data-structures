@@ -41,7 +41,7 @@ namespace algorithms {
     bool sorted = false;
     for (size_t i = 0; !sorted && i < array_size; i++) {
       sorted = true;
-      for (size_t j = 0; j < array_size - i; j++) {
+      for (size_t j = 0; j < array_size - i - 1; j++) {
         T& this_element = array[j];
         T& next_element = array[j + 1];
         if (this_element > next_element) {
