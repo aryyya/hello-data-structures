@@ -7,18 +7,17 @@
 #include <iostream>
 #include <vector>
 
-struct Options {
-  bool help = false;
-  bool print_results = false;
-  bool aggregate_results = false;
-  bool bubble_sort = false;
-  bool insertion_sort = false;
-};
-
 struct SortMethod {
   std::string name;
   void (*function)(std::vector<Person>&);
   uint64_t runtime = 0;
+};
+
+struct Options {
+  bool help = false;
+  bool print_results = false;
+  bool aggregate_results = false;
+  std::vector<SortMethod> sort_methods;
 };
 
 void fatal_error(const std::string& message) {
@@ -28,12 +27,12 @@ void fatal_error(const std::string& message) {
 
 Options parse_options(std::vector<std::string> argv) {
   Options options;
-  for (auto& arg : argv) {
+  for (const auto& arg : argv) {
     if (arg == "--help") options.help = true;
-    if (arg == "--print-results") options.print_results = true;
-    if (arg == "--aggregate-results") options.aggregate_results = true;
-    if (arg == "--bubble-sort") options.bubble_sort = true;
-    if (arg == "--insertion-sort") options.insertion_sort = true;
+    else if (arg == "--print-results") options.print_results = true;
+    else if (arg == "--aggregate-results") options.aggregate_results = true;
+    else if (arg == "--bubble-sort") options.sort_methods.push_back({ "Bubble Sort", algorithms::bubble_sort });
+    else if (arg == "--insertion-sort") options.sort_methods.push_back({ "Insertion Sort", algorithms::insertion_sort });
   }
   return options;
 }
@@ -54,13 +53,6 @@ void print_help() {
   std::cout << "Example:\n\n";
   std::cout << "  $ ./a.out data/mini --bubble-sort --insertion-sort --print-results --aggregate-results\n";
   std::cout << "\n";
-}
-
-std::vector<SortMethod> load_sort_methods(const Options& options) {
-  std::vector<SortMethod> sort_methods;
-  if (options.bubble_sort) sort_methods.push_back({ "Bubble Sort", algorithms::bubble_sort });
-  if (options.insertion_sort) sort_methods.push_back({ "Insertion Sort", algorithms::insertion_sort });
-  return sort_methods;
 }
 
 std::vector<Person> load_data(const char *path) {
@@ -120,7 +112,7 @@ int main(int argc, char *argv[]) {
     fatal_error("Error: data path not provided (use --help).");
   }
   std::vector<std::string> args = { argv, argv + argc };
-  const Options options = parse_options(args);
+  Options options = parse_options(args);
 
   // display help and exit
   if (options.help) {
@@ -130,14 +122,13 @@ int main(int argc, char *argv[]) {
 
   // load data set
   std::vector<Person> data = load_data(args[1].c_str());
-  std::vector<SortMethod> sort_methods = load_sort_methods(options);
 
   // execute sorts
-  run_sort_methods(data, sort_methods, options.print_results);
+  run_sort_methods(data, options.sort_methods, options.print_results);
 
   // display output
   if (options.aggregate_results) {
-    print_aggregate(sort_methods);
+    print_aggregate(options.sort_methods);
   }
   std::cout << "\n";
 
