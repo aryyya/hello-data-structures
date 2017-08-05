@@ -31,6 +31,7 @@ Options parse_options(std::vector<std::string> argv) {
     if (arg == "--help") options.help = true;
     else if (arg == "--print-results") options.print_results = true;
     else if (arg == "--aggregate-results") options.aggregate_results = true;
+
     else if (arg == "--bubble-sort") options.sort_methods.push_back({ "Bubble Sort", algorithms::bubble_sort });
     else if (arg == "--insertion-sort") options.sort_methods.push_back({ "Insertion Sort", algorithms::insertion_sort });
   }
@@ -95,9 +96,10 @@ void run_sort_methods(std::vector<Person>& data, std::vector<SortMethod>& sort_m
     sort_method.function(data_copy);
     const auto time_end = std::chrono::high_resolution_clock::now();
     sort_method.runtime = std::chrono::duration_cast<std::chrono::microseconds>(time_end - time_start).count();
+    const double runtime_sec = sort_method.runtime / 1e6;
 
     std::cout << "COMPLETE\n";
-    std::cout << "Duration: " << sort_method.runtime << " µs (" << (sort_method.runtime / 1000000.0) << " seconds)." << "\n";
+    std::cout << "Duration: " << sort_method.runtime << " µs (" << runtime_sec << " seconds)." << "\n";
     if (print_results) {
       std::cout << "\nResults:\n\n";
       print_data(data_copy);

@@ -30,11 +30,7 @@ namespace algorithms {
     y = z;
   }
 
-  template <class T>
-  void quick_sort(const T array[], const size_t array_size) {
-    (void) array;
-    (void) array_size; 
-  }
+  // bubble sort
 
   template <class T>
   void bubble_sort(T array[], const size_t array_size) {
@@ -57,6 +53,8 @@ namespace algorithms {
     bubble_sort(&vector[0], vector.size());
   }
 
+  // insertion sort
+
   template <class T>
   void insertion_sort(T array[], const size_t array_size) {
     size_t i = 1;
@@ -75,5 +73,44 @@ namespace algorithms {
   template <class T>
   void insertion_sort(std::vector<T>& vector) {
     insertion_sort(&vector[0], vector.size());
+  }
+
+  // selection sort
+
+  template <class T>
+  void selection_sort(T array[], const size_t array_size) {
+    (void) array;
+    (void) array_size;
+  }
+
+  template <class T>
+  void selection_sort(std::vector<T>& vector) {
+    selection_sort(&vector[0], vector.size());
+  }
+
+  // merge sort
+
+  template <class T>
+  void merge_sort(T array[], const size_t array_size) {
+    (void) array;
+    (void) array_size;
+  }
+
+  template <class T>
+  void merge_sort(std::vector<T>& vector) {
+    merge_sort(&vector[0], vector.size());
+  }
+
+  // quick sort
+
+  template <class T>
+  void quick_sort(T array[], const size_t array_size) {
+    (void) array;
+    (void) array_size;
+  }
+
+  template <class T>
+  void quick_sort(std::vector<T>& vector) {
+    quick_sort(&vector[0], vector.size());
   }
 }
